@@ -15,6 +15,11 @@ def expression_evaluation(expression):
         Returns "Error" if evaluation fails (e.g., due to syntax or runtime errors).
     """
 
+    # Replace symbols with valid Python syntax
+    expression = expression.replace('^', '**')       # Power
+    expression = expression.replace('√', 'math.sqrt') # Square root
+    expression = expression.replace('%', '/100')     # Percentage
+
     # Attempt to evaluate the expression.
     # If it fails due to invalid syntax or any runtime error, return "Error".
     try:
