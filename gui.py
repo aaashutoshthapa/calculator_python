@@ -47,20 +47,34 @@ def gui(input):
             entry.insert(tk.END, result)
         elif button_text == "C":
             entry.delete(0, tk.END)
+        elif button_text == "⌫":
+            entry.delete(len(current)-1, tk.END)
         else:
             entry.insert(tk.END, button_text)
     
     # Create and configure the input entry field for the calculator with custom font, border, and layout settings.
     global entry
-    entry = tk.Entry(input, font= "Helvetica 24", borderwidth=5, relief=tk.RIDGE, justify="right", bg="#ffffff")
-    entry.grid(row=0, column=0, columnspan=4, pady=20, padx=10, ipady=10, sticky="nsew")
+    entry = tk.Entry(
+        input,
+        font="Helvetica 24",
+        borderwidth=5,
+        relief=tk.RIDGE,
+        justify="right",
+        bg="#ffffff"
+    )
+    entry.grid(
+        row=0, column=0, columnspan=5,
+        pady=20, padx=10, ipady=10,
+        sticky="nsew"
+    )
+
 
     # Define the list of button labels (numbers, operators, and special buttons) for the calculator.
-    buttons =[
-        '7', '8', '9', '/',
-        '4', '5', '6', '*',
-        '1', '2', '3', '-',
-        'C', '0', '=', '+'
+    buttons = [
+    '7', '8', '9', '/', '⌫',
+    '4', '5', '6', '*', '^',
+    '1', '2', '3', '-', '%',
+    'C', '0', '=', '+', '√'
     ]
 
     # Initialize the starting row and column for placing buttons in the grid layout.
@@ -69,17 +83,19 @@ def gui(input):
 
     # Create and place buttons in a grid layout, configure their appearance, and bind the click event for each button.
     for button in buttons:
-        btn = tk.Button(input, text=button, font="Helvetica 18", width=5, height=2, bg="#000000", fg="white", activebackground="#666")
-
-        if button == "=":
+        btn = tk.Button(
+            input, text=button, font="Helvetica 18",
+            height=1,width=1, bg="#000000", fg="white", activebackground="#666"
+        )
+        if button in ("=", "C"):
             btn.config(bg="#00ff1e")
-        elif button == "C":
-            btn.config(bg="#00ff1e")
+        elif button == "⌫":
+            btn.config(bg="#999999")
 
-        btn.grid(row=row, column=column, padx=5, pady=5)
+        btn.grid(row=row, column=column, sticky="nsew", padx=5, pady=5)
         btn.bind("<Button-1>", click)
 
         column += 1
-        if column == 4:
+        if column == 5:
             row += 1
             column = 0

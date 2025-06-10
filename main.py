@@ -6,7 +6,7 @@ def main():
     
     input = tk.Tk()
     input.title("Acefinfo's calculator")
-    input.geometry("400x460")
+    input.geometry("390x340")
     input.configure(bg="#2b2b2b")
     gui(input)
     input.mainloop()
